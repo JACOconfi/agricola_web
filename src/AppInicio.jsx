@@ -1,6 +1,6 @@
 
 
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 // import './index.css';
 
@@ -22,6 +22,19 @@ function AppInicio() {
 /*  const [authenticated, setAuthenticated] = useState(true); */   
   const { authenticated } = useContext(AuthContext);  
   
+  useEffect(() => {
+    const handleDeveloperMode = () => {
+
+      console.log("%c¡%cDetente%c!",  'color: yellow; font-size: 34px;  font-weight: bold;  text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000, 0 -3px 0 #000, 0 3px 0 #000, -3px 0 0 #000, 3px 0 0 #000',  'color: red; font-size: 34px;  font-weight: bold;  text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000, 0 -3px 0 #000, 0 3px 0 #000, -3px 0 0 #000, 3px 0 0 #000',  'color: yellow; font-size: 34px;  font-weight: bold;  text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000, 0 -3px 0 #000, 0 3px 0 #000, -3px 0 0 #000, 3px 0 0 #000'  );
+      console.log("%cEsta función del navegador está pensada para desarrolladores.", 'font-size: 14px; font-weight: bold;');
+      console.log("%c¡Atención! Esta función del navegador está pensada para desarrolladores. Evita copiar y pegar código desconocido aquí.", 'color: red; font-size: 16px; font-weight: bold');
+    }
+
+    window.addEventListener('contextmenu', handleDeveloperMode);
+
+    return () => {  window.removeEventListener('contextmenu', handleDeveloperMode);  };
+  }, []);
+
 
   return (
 
