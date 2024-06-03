@@ -390,6 +390,17 @@ padding: 0;
 }
 
 /*  contenido de la vista administrativa administrador  */
+
+.tituladmin{     
+  display : flex;                
+  align-items:center;                
+  justify-content:center;                
+  margin:auto;                         
+  width:600px;
+}
+.bordisgray{
+  border : 2px solid gray;
+}
 .panimibor{
   border-right: 2px solid gray;
 }
@@ -533,6 +544,11 @@ padding: 0;
 
 
 /* apartado operadores*/
+
+.aler_error_infor{
+  color: red; 
+  font-weight: bold;
+}
 .modal {
   position: fixed;
   top: 0;
@@ -632,6 +648,56 @@ padding: 0;
 .listOper table tr:hover {
   background-color: rgb(240, 250, 250);
 }
+
+.titulopera{ 
+  display : flex;                
+  align-items:center;                
+  justify-content:center;                
+  margin:auto;
+  
+  margin-left: 20px;
+  margin-right: 20px;                         
+  
+}
+
+.search-container {
+  position: relative;                
+  margin:auto;                         
+  
+}
+/*
+.barra_bus_oper {
+  padding-right: 30px; /* Ajusta el espacio a la derecha para el icono */
+/*} */
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  color: #555; /* Color del icono */
+}
+
+.barra_bus_oper{     
+  display : flex;                
+  align-items:center;                
+  justify-content:center;                
+  margin:auto;                         
+  width:600px;
+  height:46px;
+  padding-left: 30px;
+}
+
+.tit_lis_oper{
+  display: flex;
+  justify-content: center;
+}
+
+.derech_nom_oper{ 
+  padding: 0 20px;
+}
+
+
 
 /* para dar color a el usuario que se esta editando y el usuario que se a de eliminar*/
 .selected-edit {
