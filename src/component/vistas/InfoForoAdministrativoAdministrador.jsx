@@ -204,12 +204,13 @@ const handleLogout = () => {
               <div className=" ps-5 " > <Link to="/Administrador/InfoForoAdministrativoAdministrador"> <img className='imagenavbar' src={image_logo} alt="Imagen de navbar"  /> </Link>  </div>
               <div className="texto_nav">  
                 <div className="flex-container">  
-                  <span className='etiRolUser'>   {/* {userData.rol}  */} cosechador </span>  
-                  <span className='etiNameUser'> juan mendes {/*  {userData.nombre}! */}</span> 
+                  <span className='etiRolUser'>   {/* {userData.rol}  */} Administrador </span>  
+                  <span className='etiNameUser'> Nicolas Arellano {/*  {userData.nombre}! */}</span> 
                 </div>  
-                <div> <img /* src={userData.codigoQR} */ alt="Código QR" /> </div> 
+                
                
               </div>
+              <div className='tituladmin'> <h2>Foro Administrativo</h2> </div> 
               <div className='cerraSecion displa_flex '> 
            {/*    <Link className='nav-link' onClick={handleLogout}>Cerrar Sesión</Link> */}
 
