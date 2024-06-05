@@ -5,7 +5,8 @@ import { AuthContext } from '../otros/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import image_logo from '../image/logo_sirculo.jpg';
 
-import { FaBars, FaAngleDown, FaAngleRight, FaUserPlus, FaSignInAlt, FaSignOutAlt, FaPencilAlt, FaUserShield, FaSearch } from "react-icons/fa";
+import { FaBars, FaSignInAlt, FaSignOutAlt, FaPencilAlt, FaUserShield, FaSearch } from "react-icons/fa";
+import Sidebar from '../Navbar/Sidebar';
 
 import axios from 'axios';
 
@@ -20,18 +21,6 @@ function Operadores() {
   const [sidebarVisible, setSidebarVisible] = useState(true);
   const toggleSidebar = () => {
     setSidebarVisible(!sidebarVisible);
-  };
-
-  /* para hacer que aparesca y desaparesta las partes del contenido del sidebar */
-  // este si
-
-  const [expandedSections, setExpandedSections] = useState([]);
-  const handleSectionClick = (section) => {
-    if (expandedSections.includes(section)) {
-      setExpandedSections(expandedSections.filter((item) => item !== section));
-    } else {
-      setExpandedSections([...expandedSections, section]);
-    }
   };
 
   const [operadores, setOperadores] = useState([]);
@@ -88,7 +77,6 @@ useEffect(() => {
 
   const [error, setError] = useState('');
 
-
   const handleChange = (e) => {
     const inputRut = e.target.value.replace(/[^\dkK]/g, ''); // Eliminar caracteres no válidos
     const formattedRut = formatRut(inputRut); // Formatear el RUT
@@ -104,46 +92,43 @@ useEffect(() => {
     return formattedRut; 
   };
 
-
   const handleSubmit = (event) => {
     event.preventDefault();  
   };
+ 
+  const esRutValido = (rut) => {
 
- 
-const esRutValido = (rut) => {
-  
-  // Verificar el formato del rut utilizando una expresión regular
-  const rutRegex = /^\d{1,2}\.\d{3}\.\d{3}[-][0-9kK]$/;
-  // const rutRegex = /^(\d{1,3}(\.\d{3}){2}-[\d0-9kK])$/;
-  
-  if (!rutRegex.test(rut)) {
-    return false;
-  }
+    // Verificar el formato del rut utilizando una expresión regular
+    const rutRegex = /^\d{1,2}\.\d{3}\.\d{3}[-][0-9kK]$/;
+    // const rutRegex = /^(\d{1,3}(\.\d{3}){2}-[\d0-9kK])$/;
 
-   // Separar el RUT en dígitos y dígito verificador
-   const rutDigits = rut.slice(0, -1);
- 
-   // Calcular el dígito verificador esperado
-   let sum = 0;
-   let multiplier = 2;
-   for (let i = rutDigits.length - 1; i >= 0; i--) {
-     sum += parseInt(rutDigits[i]) * multiplier;
-     multiplier = (multiplier % 7) + 2;
-   }
- 
-  return true;
-};
+    if (!rutRegex.test(rut)) {
+      return false;
+    }
+
+    // Separar el RUT en dígitos y dígito verificador
+    const rutDigits = rut.slice(0, -1);
+
+    // Calcular el dígito verificador esperado
+    let sum = 0;
+    let multiplier = 2;
+    for (let i = rutDigits.length - 1; i >= 0; i--) {
+      sum += parseInt(rutDigits[i]) * multiplier;
+      multiplier = (multiplier % 7) + 2;
+    }
+
+    return true;
+  };
 //termino verificacion rut
 
+  const esNombreValido = (nombre) => {
+    const regexNombre = /^[a-zA-Z\s]*$/; // Expresión regular que permite solo letras y espacios
 
-const esNombreValido = (nombre) => {
-  const regexNombre = /^[a-zA-Z\s]*$/; // Expresión regular que permite solo letras y espacios
-
-  if (!regexNombre.test(nombre)) {
-    return false;
+    if (!regexNombre.test(nombre)) {
+      return false;
+    }
+    return true;
   }
-  return true;
-}
 
   const { authenticated, logout } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -177,33 +162,22 @@ const esNombreValido = (nombre) => {
     if (rut.length !== 12) {
       setError('Tu rut deve ser igual a 12 digitos');
       return;
-    }
- 
-    
-    if (!esRutValido(rut)) {
-      // setError('El rut ingresado no es válido, \nEn el  rut tiene que ingresar  12 caracteres'); 
-       setError('El RUT ingresado no es válido. Asegúrate de que la letra "k" esté al final. Formato correcto: 12.345.678-k o 12.345.678-9');
-      
+    }    
+    if (!esRutValido(rut)) { 
+       setError('El RUT ingresado no es válido. Asegúrate de que la letra "k" esté al final. Formato correcto: 12.345.678-k o 12.345.678-9'); 
        return;
      }
-
     if (esRutValido(rut)) {
       alert('RUT válido');
     } else {
       alert('RUT inválido');
     }
-
     if (!esNombreValido(nombre)) {
       // setError('El rut ingresado no es válido, \nEn el  rut tiene que ingresar  12 caracteres'); 
        setError('El nombre solo puede contener letras y espacios');
       
        return;
      }
-
-  
-
-
-  
 
     const nuevoOperador = {
       id: Math.random().toString(),
@@ -235,29 +209,21 @@ const esNombreValido = (nombre) => {
       setError('Tu nombre deve ser menor o igual  a 40 digitos');
       return;
     }
-
     if (rut.length !== 12) {
       setError('Tu rut deve ser igual a 12 digitos');
       return;
     }
-
-    if (!esRutValido(rut)) {
-      // setError('El rut ingresado no es válido, \nEn el  rut tiene que ingresar  12 caracteres'); 
+    if (!esRutValido(rut)) { 
        setError('El RUT ingresado no es válido. Asegúrate de que la letra "k" esté al final. Formato correcto: 12.345.678-k o 12.345.678-9');
-      
        return;
      }
-
     if (esRutValido(rut)) {
       alert('RUT válido');
     } else {
       alert('RUT inválido');
     }
-
-    if (!esNombreValido(nombre)) {
-      // setError('El rut ingresado no es válido, \nEn el  rut tiene que ingresar  12 caracteres'); 
-       setError('El nombre solo puede contener letras y espacios');
-      
+    if (!esNombreValido(nombre)) { 
+       setError('El nombre solo puede contener letras y espacios'); 
        return;
      }
 
@@ -308,23 +274,11 @@ const esNombreValido = (nombre) => {
 
   //para la barra de busqueda
   const [busqueda, setBusqueda] = useState('');
-  /*
-  operadores.filter(operador =>  operador.nombre.toLowerCase().includes(busqueda.toLowerCase()) ||  operador.rut.toLowerCase().includes(busqueda.toLowerCase()))
-  */
-  /*
-  const datosFiltrados = todosLosDatos.filter(dato => 
-    dato.name.common.toLowerCase().includes(query.toLowerCase()) || 
-    dato.name.official.toLowerCase().includes(query.toLowerCase()) ||  
-    dato.translations.spa.common.toLowerCase().includes(query.toLowerCase()) || 
-    dato.translations.spa.official.toLowerCase().includes(query.toLowerCase())  
-  );
-  */
 
   const handbus = (e) => {
     setBusqueda(e.target.value);
   };
   
-
   return (
     <div>
       {/*nav cabesera principal */}
@@ -332,104 +286,33 @@ const esNombreValido = (nombre) => {
         <div className="icon_mb displa_flex"> <button className='transparentis' onClick={toggleSidebar}> < FaBars /> </button> </div>
         <div className=" ps-5 " ><Link to="/Administrador/InfoForoAdministrativoAdministrador"> <img className='imagenavbar' src={image_logo} alt="Imagen de navbar" /> </Link>  </div>
         <div className="texto_nav">
-
+        
+          {modoEdicion ? (  <h3 className='titulopera'>Editar operador</h3>  ) : (  <h3 className='titulopera'>Agregar nuevo operador</h3>  )}
           
-          {modoEdicion ? (
-              <h3 className='titulopera'>Editar operador</h3>
-            ) : (
-              <h3 className='titulopera'>Agregar nuevo operador</h3>
-            )}
-          
-
         </div>
         <div className="search-container">
-        <FaSearch className="search-icon"/>
-          <input className='barra_bus_oper'  type="text"  placeholder="Buscar Operador"  value={busqueda}  onChange={handbus}  /> 
-          
-          </div>
-        {/*   <input  className='buscadorInput'  type="text"   placeholder="Buscar Nombre País..."   value={busqueda}    onChange={e => setBusqueda(e.target.value)}   /> */}
+          <FaSearch className="search-icon" />
+          <input className='barra_bus_oper' type="text" placeholder="Buscar Operador" value={busqueda} onChange={handbus} />
+
+        </div>
         
         <div className='cerraSecion displa_flex '>
-          {/*    <Link className='nav-link' onClick={handleLogout}>Cerrar Sesión</Link> */}
 
-          {authenticated ? (
-            <div>
-              <button className='btn nav-link mb-2 ' onClick={handleLogout} ><FaSignOutAlt />  Cerrar sesión  </button>
-            </div>
-          ) : (
-            <div>
-              <Link className='btn nav-link mb-2 ' to="/LoginAdmin"><FaSignInAlt />  Iniciar sesión </Link>
-            </div>
-          )}
+          {authenticated ? (  <div>  <button className='btn nav-link mb-2 ' onClick={handleLogout} ><FaSignOutAlt />  Cerrar sesión  </button>  </div>  ) : (  <div>  <Link className='btn nav-link mb-2 ' to="/LoginAdmin"><FaSignInAlt />  Iniciar sesión </Link>  </div>  )}
 
         </div> {/* Nuevo botón para cerrar sesión */}
 
       </nav>
       {/* div despues del nav */}
       <div id='layoutSidenav' className={` ${sidebarVisible ? '' : 'layoutSidenav_nav-hidden'}`}>
-        {/* div de la barra lateral */}
-        <div id="layoutSidenav_nav">
-          <nav className='p-1' >
-            {/* esto es lo que voy a probar ahora */}
-            <div className="nav-item">
-              <a href="#" className={`nav-link nov_encabeza ${expandedSections.includes('listas') ? 'expanded' : ''}`} onClick={() => handleSectionClick('listas')}  >
-                <div className='isquier'>  Listas  </div>
-                <div className='derech'>  {expandedSections.includes('listas') ? <FaAngleDown /> : <FaAngleRight />}  </div>
-              </a>
-              {expandedSections.includes('listas') && (
-                <nav >
-                  <a className="nav-link nov_camp">Lista de Cosechadores</a>
-                  <a className="nav-link nov_camp">Lista de Entregas</a>
-                  <a className="nav-link nov_camp">Lista de codigos QR</a>
-                  <a className="nav-link nov_camp">Lista de bines</a>
-                </nav>
-              )}
-            </div>
-            <div className="nav-item">
-              <a href="#" className={`nav-link nov_encabeza ${expandedSections.includes('tendencia') ? 'expanded' : ''}`} onClick={() => handleSectionClick('tendencia')}  >
-                <div className='isquier'>  Datos en tendencia  </div>
-                <div className='derech'>  {expandedSections.includes('tendencia') ? <FaAngleDown /> : <FaAngleRight />}  </div>
-              </a>
-              {expandedSections.includes('tendencia') && (
-                <nav >
-                  <a className="nav-link nov_camp">Rendimiento de cosecha</a>
-                  <a className="nav-link nov_camp">Cambios en la eficiencia</a>
-                </nav>
-              )}
-            </div>
-
-            <div className="nav-item">
-              <a href="#" className={`nav-link nov_encabeza ${expandedSections.includes('referenciales') ? 'expanded' : ''}`} onClick={() => handleSectionClick('referenciales')}  >
-                <div className='isquier'> Crear Datos Referenciales </div>
-                <div className='derech'>  {expandedSections.includes('referenciales') ? <FaAngleDown /> : <FaAngleRight />}  </div>
-
-              </a>
-              {expandedSections.includes('referenciales') && (
-                <nav >
-                  <a className="nav-link nov_camp">Ubicación</a>
-                  <a className="nav-link nov_camp">Fruta</a>
-                </nav>
-              )}
-            </div>
-
-            <div className='nav-item'>
-              <Link className='nav-link operplus' to="/Administrador/InfoForoAdministrativoAdministrador/Operadores" >
-                <div className='iconplus'> <FaUserPlus /></div>
-                <div>Operadores QR  </div>
-              </Link>
-            </div>
-          </nav>
-        </div>
+        {/* barra lateral (Sidebar) */}
+        <Sidebar />
 
         {/* div del contenido que esta al lado de la barra lateral */}
         <div id="layoutSidenav_content" className={`${sidebarVisible ? '' : 'layoutSidenav_content-shifted'}`}>
 
           <div className='creaOper'>
-            {modoEdicion ? (
-              <h2>Editar operador</h2>
-            ) : (
-              <h2>Agregar nuevo operador</h2>
-            )}
+            {modoEdicion ? (  <h2>Editar operador</h2>  ) : (  <h2>Agregar nuevo operador</h2>  )}
             
             {/* Formulario para crear o editar un operador */}
             <form  onSubmit={handleSubmit} >
@@ -448,18 +331,11 @@ const esNombreValido = (nombre) => {
                   <p>{rut.length} </p>
                 </div>
               </div>
-
               {error && <p className='aler_error_infor'>{error}</p>}
-             
             </form>
 
-            {modoEdicion ? (
-              <button type="button" onClick={editarOperador}>Guardar cambios</button>
-            ) : (
-              <button type="button" onClick={agregarOperador}>Agregar operador</button>
-            )}
+            {modoEdicion ? (  <button type="button" onClick={editarOperador} className="btn btn-light btn-outline-dark" >Guardar cambios</button>  ) : (  <button type="button" onClick={agregarOperador} className="btn btn-light btn-outline-dark" >Agregar operador</button>  )}
           </div>
-
 
           <div className="table1 bordisgray" >
             <div className='listOper '  >
@@ -478,7 +354,6 @@ const esNombreValido = (nombre) => {
                   {operadores.filter((operador) =>  operador.nombre.toLowerCase().includes(busqueda.toLowerCase()) ||  operador.rut.toLowerCase().includes(busqueda.toLowerCase())  )
                     .map((operador) => (
                     <tr key={operador.id} className={(operadorEditado && operadorEditado.id === operador.id) ? 'selected-edit' : (idOperadorEliminar === operador.id) ? 'selected-delete' : ''}  >
-
                       
                         <td ><div className='displa_flex '>
                           <div ><FaUserShield /></div>
@@ -519,9 +394,8 @@ const esNombreValido = (nombre) => {
                     RUT: {usuarioEliminar.rut}
                   </p>
                 )}
-                <div>
+                <div className='separound_spas displa_flex'>
                   <button type="button" className="btn btn-light btn-outline-danger" onClick={eliminarOperador}>Eliminar</button>
-                  {/*  <button type="button" onClick={() => eliminarOperador(operador.id)}>Eliminar</button>  */}
                   <button type="button" className="btn btn-light btn-outline-dark" onClick={() => cancelarEliminacion()}>Cancelar</button>
                 </div>
               </div>
@@ -532,7 +406,6 @@ const esNombreValido = (nombre) => {
       </div>
 
     </div>
-
 
   )
 };
