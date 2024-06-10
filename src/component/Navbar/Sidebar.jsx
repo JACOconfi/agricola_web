@@ -28,7 +28,7 @@ function Sidenavbar() {
                     </a>
                     {expandedSections.includes('listas') && (
                         <nav >
-                            <a className="nav-link nov_camp">Lista de Cosechadores</a>
+                            <Link className="nav-link nov_camp" to="/Administrador/InfoForoAdministrativoAdministrador/ListaCosechadores">Lista de Cosechadores</Link>
                             <a className="nav-link nov_camp">Lista de Entregas</a>
                             <a className="nav-link nov_camp">Lista de codigos QR</a>
                             <a className="nav-link nov_camp">Lista de bines</a>
@@ -42,7 +42,7 @@ function Sidenavbar() {
                     </a>
                     {expandedSections.includes('tendencia') && (
                         <nav >
-                            <a className="nav-link nov_camp">Rendimiento de cosecha</a>
+                            <Link className="nav-link nov_camp" to="/Administrador/InfoForoAdministrativoAdministrador/TenRendimientoCosecha">Rendimiento de cosecha</Link>
                             <a className="nav-link nov_camp">Cambios en la eficiencia</a>
                         </nav>
                     )}
