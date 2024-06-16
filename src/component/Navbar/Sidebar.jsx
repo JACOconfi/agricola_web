@@ -31,7 +31,7 @@ function Sidenavbar() {
                             <Link className="nav-link nov_camp" to="/Administrador/InfoForoAdministrativoAdministrador/ListaCosechadores">Lista de Cosechadores</Link>
                             <a className="nav-link nov_camp">Lista de Entregas</a>
                             <a className="nav-link nov_camp">Lista de codigos QR</a>
-                            <a className="nav-link nov_camp">Lista de bines</a>
+                            <Link className="nav-link nov_camp" to="/Administrador/InfoForoAdministrativoAdministrador/ListaBines" >Lista de bines</Link>
                         </nav>
                     )}
                 </div>
