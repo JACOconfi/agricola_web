@@ -14,6 +14,7 @@ import InfoCosechador from './component/vistas/InfoCosechador';
 import LoginAdmin from './component/vistas/LoginAdmin';
 import InfoForoAdministrativoAdministrador from './component/vistas/InfoForoAdministrativoAdministrador';
 import ListaCosechadores from './component/vistas/ListaCosechadores';
+import ListaBines from './component/vistas/ListaBines';
 import TenRendimientoCosecha from './component/vistas/TenRendimientoCosecha';
 import Frutas from './component/vistas/Frutas';
 import Uvicaciones from './component/vistas/Uvicaciones';
@@ -73,6 +74,7 @@ function AppInicio() {
             
             {/*Datos Listas*/}
             <Route path="/Administrador/InfoForoAdministrativoAdministrador/ListaCosechadores" element={authenticated ? (  <ListaCosechadores />  ) : (  <Navigate to="/LoginAdmin" replace />  )  }  />
+            <Route path="/Administrador/InfoForoAdministrativoAdministrador/ListaBines" element={authenticated ? (  <ListaBines />  ) : (  <Navigate to="/LoginAdmin" replace />  )  }  />
 
             {/*Datos en Tendencia*/}
             <Route path="/Administrador/InfoForoAdministrativoAdministrador/TenRendimientoCosecha" element={authenticated ? (  <TenRendimientoCosecha />  ) : (  <Navigate to="/LoginAdmin" replace />  )  }  />
