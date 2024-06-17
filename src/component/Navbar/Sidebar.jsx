@@ -43,7 +43,7 @@ function Sidenavbar() {
                     {expandedSections.includes('tendencia') && (
                         <nav >
                             <Link className="nav-link nov_camp" to="/Administrador/InfoForoAdministrativoAdministrador/TenRendimientoCosecha">Rendimiento de cosecha</Link>
-                            <a className="nav-link nov_camp">Cambios en la eficiencia</a>
+                            <Link className="nav-link nov_camp" to="/Administrador/InfoForoAdministrativoAdministrador/TenCambiosEficiencia" >Cambios en la eficiencia</Link>
                         </nav>
                     )}
                 </div>
