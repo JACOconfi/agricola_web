@@ -175,41 +175,7 @@ function TenCambiosEficiencia() {
            });
    }, [  ]);
    const [formatoDescarga, setFormatoDescarga] = useState('');
-
- /*   // Función para descargar el reporte en formato PDF o en CSV
-    const descargarReporte = () => {
-        const fechaActual = new Date();
-        const dia = fechaActual.getDate().toString().padStart(2, '0');
-        const mes = (fechaActual.getMonth() + 1).toString().padStart(2, '0');
-        const anio = fechaActual.getFullYear();
-        const fechaFormateada = `${dia}-${mes}-${anio}`;
-        if (formatoDescarga === 'pdf') {
-          const doc = new jsPDF();
-          doc.text('Reporte de Información', 20, 10); 
-          let y = 20;
-          rendimientosCosecha.forEach(item => {
-            doc.text(`Fruta: ${item.fruta}, Fecha: ${item.fecha}, Entregas: ${item.entregas}, Bines: ${item.bines}`, 20, y);
-            y += 10;
-          });
-          doc.save(`reporte_${fechaFormateada}.pdf`);
-        } else if (formatoDescarga === 'csv') {
-          const csvData = [
-            ['Fruta', 'Fecha', 'Entregas', 'Bines'],
-            ...rendimientosCosecha.map(item => [item.fruta, item.fecha, item.entregas, item.bines])
-          ];
-          const csvContent = csvData.map(row => row.join(',')).join('\n');
-          const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8' });
-          const url = URL.createObjectURL(blob);
-          const link = document.createElement('a');
-          link.href = url;
-          link.download = `reporte_${fechaFormateada}.csv`;
-          link.click();
-        } else { alert('Por favor selecciona un formato de descarga.'); }
-      };
-      */
-
-      ////   ////////
-
+        // Función para descargar el reporte en formato PDF o en CSV
       const descargarReporte = () => {
         const fechaActual = new Date();
         const dia = fechaActual.getDate().toString().padStart(2, '0');
