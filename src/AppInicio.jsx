@@ -16,6 +16,7 @@ import InfoForoAdministrativoAdministrador from './component/vistas/InfoForoAdmi
 import ListaCosechadores from './component/vistas/ListaCosechadores';
 import ListaBines from './component/vistas/ListaBines';
 import TenRendimientoCosecha from './component/vistas/TenRendimientoCosecha';
+import TenCambiosEficiencia from './component/vistas/TenCambiosEficiencia';
 import Frutas from './component/vistas/Frutas';
 import Uvicaciones from './component/vistas/Uvicaciones';
 
@@ -78,6 +79,7 @@ function AppInicio() {
 
             {/*Datos en Tendencia*/}
             <Route path="/Administrador/InfoForoAdministrativoAdministrador/TenRendimientoCosecha" element={authenticated ? (  <TenRendimientoCosecha />  ) : (  <Navigate to="/LoginAdmin" replace />  )  }  />
+            <Route path="/Administrador/InfoForoAdministrativoAdministrador/TenCambiosEficiencia" element={authenticated ? (  <TenCambiosEficiencia />  ) : (  <Navigate to="/LoginAdmin" replace />  )  }  />
 
             {/*Datos Refenciales*/}
             <Route path="/Administrador/InfoForoAdministrativoAdministrador/Frutas" element={authenticated ? (  <Frutas />  ) : (  <Navigate to="/LoginAdmin" replace />  )  }  /> 
