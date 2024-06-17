@@ -795,6 +795,31 @@ padding: 0;
 }
 
 
+/* apartado TenCambiosEficiencia*/
+.tablitaCambiEfi{
+  margin-top:0px;
+  margin-bottom:0px;
+  height:680px;
+}
+.selectformatodescarga{
+  margin-left: auto;
+  position: absolute; 
+  left: 10px;
+  padding: 1px 10px 5px 10px;
+}
+.buttondescargar{
+  margin-left: auto;
+  position: absolute;
+  right: 100px;
+  padding: 1px 10px 5px 10px;
+  border: 2px solid blue;
+}
+.div_de_losgraficos{
+  width:600px;
+  height:680px; 
+}
+
+
 /* agrocheckWeb  */
 
 
